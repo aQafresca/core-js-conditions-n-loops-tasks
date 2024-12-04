@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,9 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  const maxNum = a > b ? a : b;
+  return maxNum > c ? maxNum : c;
 }
 
 /**
@@ -60,8 +61,18 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  let capture = false;
+  if (queen.x === king.x || queen.y === king.y) {
+    capture = true;
+  }
+  if (queen.x === queen.y && king.x === king.y) {
+    capture = true;
+  }
+  if (queen.x + queen.y === king.x + king.y) {
+    capture = true;
+  }
+  return capture;
 }
 
 /**
@@ -82,8 +93,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  return a === b || a === c || b === c;
 }
 
 /**
@@ -100,8 +114,31 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  let remainingNumber = num;
+  const romanNumerals = [
+    [30, 'XXX'],
+    [20, 'XX'],
+    [10, 'X'],
+    [9, 'IX'],
+    [8, 'VIII'],
+    [7, 'VII'],
+    [6, 'VI'],
+    [5, 'V'],
+    [4, 'IV'],
+    [3, 'III'],
+    [2, 'II'],
+    [1, 'I'],
+  ];
+  for (let i = 0; i < romanNumerals.length; i += 1) {
+    const [value, roman] = romanNumerals[i];
+    while (remainingNumber >= value) {
+      result += roman;
+      remainingNumber -= value;
+    }
+  }
+  return result;
 }
 
 /**
